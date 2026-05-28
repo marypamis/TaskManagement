@@ -1,0 +1,26 @@
+@TaskManagement.API_HostAddress = http://localhost:5016
+@token = {{login.response.body.token}}
+
+### Login
+# @name login
+POST {{TaskManagement.API_HostAddress}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+### Get tasks (requires JWT)
+GET {{TaskManagement.API_HostAddress}}/api/Tasks
+Authorization: Bearer {{token}}
+
+### Create task (Admin only)
+POST {{TaskManagement.API_HostAddress}}/api/Tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Sample task",
+  "description": "Created from .http file"
+}
