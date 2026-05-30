@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.API", "TaskM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.API.Tests", "..\TaskManagement.API.Tests\TaskManagement.API.Tests.csproj", "{66B90A05-7D2D-471E-BF7A-592873FAF043}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Desktop", "..\TaskManagement.Desktop\TaskManagement.Desktop.csproj", "{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{66B90A05-7D2D-471E-BF7A-592873FAF043}.Release|x64.Build.0 = Release|Any CPU
 		{66B90A05-7D2D-471E-BF7A-592873FAF043}.Release|x86.ActiveCfg = Release|Any CPU
 		{66B90A05-7D2D-471E-BF7A-592873FAF043}.Release|x86.Build.0 = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|x64.Build.0 = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE5BC041-2C80-45BF-AB3C-6E0FC2888248}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
