@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    name: .NET Build and Tests
+    # WPF desktop project requires Windows; API and tests run here too.
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore NuGet packages
+        run: dotnet restore TaskManagement.API/TaskManagement.API.sln
+
+      - name: Build solution (Release)
+        run: dotnet build TaskManagement.API/TaskManagement.API.sln --configuration Release --no-restore
+
+      - name: Run API tests
+        run: dotnet test TaskManagement.API.Tests/TaskManagement.API.Tests.csproj --configuration Release --no-build --verbosity normal
+
+  frontend:
+    name: React Build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: TaskManagement.Web
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: TaskManagement.Web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build

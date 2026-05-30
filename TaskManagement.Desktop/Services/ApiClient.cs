@@ -35,7 +35,13 @@ public class ApiClient
 
         ApplyAuthHeader(request, requireAuth);
 
-        var response = await _httpClient.SendAsync(request, cancellationToken);
+        var sendResult = await SendRequestAsync(request, cancellationToken);
+        if (!sendResult.Success)
+        {
+            return (false, default, sendResult.ErrorMessage);
+        }
+
+        using var response = sendResult.Response!;
 
         if (response.IsSuccessStatusCode)
         {
@@ -53,7 +59,13 @@ public class ApiClient
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         ApplyAuthHeader(request, requireAuth: true);
 
-        var response = await _httpClient.SendAsync(request, cancellationToken);
+        var sendResult = await SendRequestAsync(request, cancellationToken);
+        if (!sendResult.Success)
+        {
+            return (false, default, sendResult.ErrorMessage);
+        }
+
+        using var response = sendResult.Response!;
 
         if (response.IsSuccessStatusCode)
         {
@@ -71,7 +83,13 @@ public class ApiClient
         using var request = new HttpRequestMessage(HttpMethod.Patch, url);
         ApplyAuthHeader(request, requireAuth: true);
 
-        var response = await _httpClient.SendAsync(request, cancellationToken);
+        var sendResult = await SendRequestAsync(request, cancellationToken);
+        if (!sendResult.Success)
+        {
+            return (false, default, sendResult.ErrorMessage);
+        }
+
+        using var response = sendResult.Response!;
 
         if (response.IsSuccessStatusCode)
         {
@@ -80,6 +98,26 @@ public class ApiClient
         }
 
         return (false, default, await ReadErrorMessageAsync(response, cancellationToken));
+    }
+
+    private async Task<(bool Success, HttpResponseMessage? Response, string? ErrorMessage)> SendRequestAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var response = await _httpClient.SendAsync(request, cancellationToken);
+            return (true, response, null);
+        }
+        catch (HttpRequestException)
+        {
+            // marypamis: show a clear message when the API is not running locally
+            return (false, null, $"Cannot connect to API at {ApiSettings.BaseUrl}. Start TaskManagement.API first.");
+        }
+        catch (TaskCanceledException)
+        {
+            return (false, null, "Request timed out. Check that the API is running.");
+        }
     }
 
     private void ApplyAuthHeader(HttpRequestMessage request, bool requireAuth)
