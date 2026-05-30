@@ -1,0 +1,50 @@
+<UserControl x:Class="TaskManagement.Desktop.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Task Management Login"
+                   FontSize="22"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,24"/>
+
+        <TextBlock Grid.Row="1" Text="Username" Margin="0,0,0,4"/>
+        <TextBox Grid.Row="2"
+                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                 Padding="8"
+                 Margin="0,0,0,12"/>
+
+        <TextBlock Grid.Row="3" Text="Password" Margin="0,0,0,4"/>
+        <PasswordBox x:Name="PasswordBox"
+                     Grid.Row="4"
+                     Padding="8"
+                     Margin="0,0,0,12"
+                     PasswordChanged="PasswordBox_PasswordChanged"/>
+
+        <StackPanel Grid.Row="5">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="DarkRed"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,12"
+                       Visibility="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToVisibilityConverter}}"/>
+
+            <Button Content="Login"
+                    Command="{Binding LoginCommand}"
+                    Padding="12,6"
+                    HorizontalAlignment="Left"
+                    MinWidth="100"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
